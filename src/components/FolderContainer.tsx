@@ -53,17 +53,14 @@ const FolderContainer: FC<FolderContainerProps> = ({ folders }) => {
             {openFolder !== null && openFolder[0] === folder ? (
               <>
                 {openFolder[1].map((file, idx) => (
-                  <li
-                    key={idx}
-                    className="w-96 hover:bg-white hover:rounded-sm transition-colors px-2 py-1 flex"
-                  >
-                    <a
-                      href={file.url}
-                      className="underline hover:no-underline cursor-pointer"
+                  <a href={file.url} className="cursor-pointer">
+                    <li
+                      key={idx}
+                      className="w-96 hover:bg-neutral-50 transition-colors px-2 py-1 flex border-b border-dashed"
                     >
                       {file.title ?? "Untitled File"}
-                    </a>
-                  </li>
+                    </li>
+                  </a>
                 ))}
               </>
             ) : (

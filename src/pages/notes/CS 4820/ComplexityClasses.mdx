@@ -1,1 +1,26 @@
+---
+layout: ../../../layouts/Note.astro
+title: "Complexity Classes"
+---
+
+import { M } from "../../../components/Math";
+
 # Notes on complexity classes
+
+Complexity classes are a classification of computational problems based on the time complexity of their solutions. Some problems, like stable matching, are solvable in a polynomial time complexity <M>O(n^a)</M>, where <M>a\in\mathbb\{R}</M>.
+
+These are problems are under the **P (polynomial)** class
+
+**Decision problems** are problems where given some solution <M>n</M> for some problem <M>s</M>, we output YES if <M>n</M> is valid and NO otherwise
+
+**NP (non-deterministic polynomial time)** problems are a special group of decision problems where we can check if a solution <M>s</M> is valid in polynomial time.
+
+**NP Complete** problems are NP problems that we currently have no solution for in polynomial time. They are unique because finding the algorithm to solve one efficiently means that an efficient algorithm exists to solve every other NP-complete problem. This is provable through reduction, which we'll cover in a second.
+
+An important skill for this topic is being able to prove that one problem is a **reduction** of another. A reduction is a formal relationship claiming that one problem is of equal difficulty as another problem.
+
+Here's an example of a reduction of two problems <M>A</M> and <M>B</M>: let's say <M>A \leq_R B</M>. This tells us that problem <M>B</M> is at least as hard to solve as <M>A</M> (in terms of time complexity).
+
+We focus on **polynomial-time reducibility**, which essentially says that if we have a black box algorithm that can solve problem <M>B</M>, then problem <M>A</M> can also be solved with a polynomial number of steps in addition to using that black box algorithm a polynomial number of times.
+
+If the black box algorithm itself is <M>O(n^a)</M>, then under polynomial-time reduction <M>A</M> is also solvable in polynomial time.
