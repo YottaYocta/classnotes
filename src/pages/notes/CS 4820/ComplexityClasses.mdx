@@ -24,3 +24,13 @@ Here's an example of a reduction of two problems <M>A</M> and <M>B</M>: let's sa
 We focus on **polynomial-time reducibility**, which essentially says that if we have a black box algorithm that can solve problem <M>B</M>, then problem <M>A</M> can also be solved with a polynomial number of steps in addition to using that black box algorithm a polynomial number of times.
 
 If the black box algorithm itself is <M>O(n^a)</M>, then under polynomial-time reduction <M>A</M> is also solvable in polynomial time.
+
+## Showing something is NP complete
+
+Within a graph \\(G=(V, E)\\), a subset of nodes \\(S\\) is independent if no two nodes in that set are joined by an edge. The decision variant of the **Independent Set** problem is as follows:
+
+<figure>
+  <figcaption>Independent Set Problem</figcaption>
+  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain an independent
+  set of at least size \\(k\\)?
+</figure>
