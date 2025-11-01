@@ -22,4 +22,12 @@
     border-radius: var(--radius-sm);
     /* line-height: 0.5rem; */
   }
+
+  .note > p {
+    text-wrap-style: pretty;
+  }
+  .note > hr {
+    width: 100%;
+    border: solid #000 1px;
+  }
 }

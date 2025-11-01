@@ -27,10 +27,64 @@ If the black box algorithm itself is <M>O(n^a)</M>, then under polynomial-time r
 
 ## Showing something is NP complete
 
-Within a graph \\(G=(V, E)\\), a subset of nodes \\(S\\) is independent if no two nodes in that set are joined by an edge. The decision variant of the **Independent Set** problem is as follows:
+We can compare **tractability**, or the complexity of different problems, by mapping the input and steps needed for one problem into a second problem. Following is an example of this technique for the Independent Set Problem and the Vertex Cover Problem.
+
+Within a graph \\(G=(V, E)\\), a **subset of nodes \\(S\\) is independent if no two nodes in that set are joined by an edge**. The decision variant of the Independent Set problem is as follows:
 
 <figure>
-  <figcaption>Independent Set Problem</figcaption>
+  <figcaption>Independent Set Decision Problem</figcaption>
   Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain an independent
   set of at least size \\(k\\)?
 </figure>
+
+For the Vertex Cover Problem, a subset \\(S\\) of some graph \\(G=(V, E)\\) is a vertex cover if every edge in \\(E\\) has at least one endpoint in \\(S\\). Here's the decision variant of the problem:
+
+<figure>
+  <figcaption>Vertex Cover Decision Problem</figcaption>
+  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain a vertex
+  cover of at least size \\(k\\)?
+</figure>
+
+---
+
+let S be V - A, where A is an independent set. Prove that S is a vertex cover.
+
+- arbitrary edge e = (u, v)
+- contradictory that both u, v in A, because then A would not be independent.
+- for any edge e, at most one endpoint can be in A
+- S is a vertex cover
+
+let A be V - S, where S is a vertex cover. Prove that A is an independent set.
+
+- arbitrary edge e = (u, v)
+- contradiction: suppose u, v both in A. This violates condition of each edge having at least one endpoint in S.
+- for any edge e, at least one endpoint has to be in S
+- synonymously, at most one endpoint for arbitrary edge e can be in A
+- A is an independent set
+
+Reductions follow naturally:
+
+Prove that Independent Set \\(\leq_R\\) Vertex Cover
+
+- let B be some black box algorithm that can solve vertex cover decision prob.
+- given any graph G, iterate through possible values of k, determining smallest possible k for vertex cover
+- inverse is the independent set; \\(||G|| - k\\) guaranteed to be largest size
+
+Prove that Vertex Cover \\(\leq_R\\) Independent Set
+
+- let B be some black box algorithm that can solve independent set
+- find largest possible indep. set (polynomial)
+- inverse is vertex cover.
+
+<figure>
+  Set Cover (decision version) - general prob where given set \\(U\\), integer
+  \\(k\\), and list of subsets \\(S\\), is it possible to get \\(U\\) through a
+  union of \\(k\\) elements from \\(S\\)
+</figure>
+
+Prove that Vertex Cover \\(\leq_R\\) Set Cover
+
+- suppose we have black box that can solve decision version of set cover
+- create a set cover instance where ground set (\\(U\\)) is equal to the all verteces. each subset \\(S_i\\) corresponds with all the edges that would be covered if \\(v_i\\) were included
+- picking subset \\(S_i\\) equal to picking \\(v_i\\)
+- summary: to solve for \\(k\\) vertex cover, prob on \\(G=(E, V)\\), create subsets \\(S_i \dots\\) for each \\(v\\) that corresponds with all vertices that would be covered if \\(v\\) were added/selected. use black box to solve this instance, return answer for black box.
