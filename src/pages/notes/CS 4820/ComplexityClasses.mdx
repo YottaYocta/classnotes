@@ -25,7 +25,7 @@ We focus on **polynomial-time reducibility**, which essentially says that if we 
 
 If the black box algorithm itself is <M>O(n^a)</M>, then under polynomial-time reduction <M>A</M> is also solvable in polynomial time.
 
-## Showing something is NP complete
+## Tractability
 
 We can compare **tractability**, or the complexity of different problems, by mapping the input and steps needed for one problem into a second problem. Following is an example of this technique for the Independent Set Problem and the Vertex Cover Problem.
 
@@ -89,6 +89,8 @@ Prove that Vertex Cover \\(\leq_R\\) Set Cover
 - picking subset \\(S_i\\) equal to picking \\(v_i\\)
 - summary: to solve for \\(k\\) vertex cover, prob on \\(G=(E, V)\\), create subsets \\(S_i \dots\\) for each \\(v\\) that corresponds with all vertices that would be covered if \\(v\\) were added/selected. use black box to solve this instance, return answer for black box.
 
+note: for reductions, we almost always find a mapping from one problem to another and call the black box once.
+
 ---
 
 \\(A\\) is algo that solves decision prob
@@ -119,4 +121,43 @@ a certifier **B** is an algorithm that can verify if a solution is correct for a
 
 examples
 
-- 3Sat: \\(t\\) assignment of truth values to variables; ch
+- 3Sat: \\(t\\) assignment of truth values to variables
+- Set Cover: \\(t\\) is a list of \\(k\\) sets, \\(B\\) checks if union equals list
+- Independent Set: \\(t\\) is identity of a set with at least \\(k\\) vertices. \\(B\\) checks that no edges exist inbetween them
+
+## Showing something is NP complete
+
+Since we don't know the answer to \\(\mathcal\{P = NP\}\\), we have instead turned focus to determine how problems in \\(\mathcal\{NP\}\\) relate to one another.
+
+To show that a problem is NP-complete, we must reduce it to some existing np problem:
+
+<figure>
+<figcaption>
+Proving NP completeness for some problem \\(B\\)
+</figcaption>
+
+<p>
+Given an NP-complete problem \\(A\\) show \\(A \leq_R B \\)
+</p>
+</figure>
+
+## Circuit Satisfiability
+
+physical analogue to boolean satisfiability
+
+must show for some algo \\(X\\) that \\(X\leq_R\\) Circuit Satisfiability.
+
+know that \\(B(\cdot, \cdot)\\) is efficient certifier
+
+{/* question: why specific? why do we not have to worry about arbitrary s? */}
+
+must answer: for specific input \\(s\\), does there exist \\(t\\) of length \\(p(l)\\) such that \\(B(s, t) = \\) YES?
+
+can be reduced to SAT
+
+3SAT also reducable to SAT
+
+general strategy:
+
+- show problem is NP
+- try to reduce problem to existing NP-complete

@@ -2,10 +2,16 @@
 
 @layer utilities {
   .note > h1 {
+    font-weight: bolder;
+    font-size: larger;
+  }
+  .note > h2 {
+    font-weight: bold;
     font-size: large;
   }
 
   .note > figure {
+    width: 100%;
     padding: 1.5rem 1.5rem;
     background: var(--color-neutral-50);
     border-radius: var(--radius-md);
