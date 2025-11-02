@@ -85,6 +85,38 @@ Prove that Vertex Cover \\(\leq_R\\) Independent Set
 Prove that Vertex Cover \\(\leq_R\\) Set Cover
 
 - suppose we have black box that can solve decision version of set cover
-- create a set cover instance where ground set (\\(U\\)) is equal to the all verteces. each subset \\(S_i\\) corresponds with all the edges that would be covered if \\(v_i\\) were included
+- create a set cover instance where ground set (\\(U\\)) is equal to the all vertices. each subset \\(S_i\\) corresponds with all the edges that would be covered if \\(v_i\\) were included
 - picking subset \\(S_i\\) equal to picking \\(v_i\\)
 - summary: to solve for \\(k\\) vertex cover, prob on \\(G=(E, V)\\), create subsets \\(S_i \dots\\) for each \\(v\\) that corresponds with all vertices that would be covered if \\(v\\) were added/selected. use black box to solve this instance, return answer for black box.
+
+---
+
+\\(A\\) is algo that solves decision prob
+\\(X\\) is set containing YES's to the problem
+\\(A\\) solves \\(X\\) only if for all binary strings \\(s\\), \\(A(s) = \\) yes and \\(s\in X\\)
+
+\\(A\\) has polynomial running time if exists a polynomial function \\(p(\cdot)\\) such that \\(A\\) is of \\(O(p(\|s\|))\\) complexity. In other words, the time complexity of \\(A\\) must be a polynomial function of its input size
+
+Some certifier \\(B\\) is a function that takes two parameters \\(s\\) and \\(t\\), with \\(s\\)
+representing an input string and \\(t\\) a verification string used to check
+if \\(s\\) is valid
+
+this checker must run in polynomial time
+
+Efficient certification involves
+
+- existence of polytime certifier \\(B\\) that takes inputs \\(s, t\\)
+- existence of some polynomial function \\(p\\) such that \\(s\in X\\) only if \\(\|t\| \leq p(\|s\|)\\) and \\(B(s, t)\\) is YES
+
+In other words, an efficient certification is valid only when
+
+- there is a certifier that can correctly check if a solution works in polynomial time
+- all \\(s\\) have a certifier string \\(t\\) that has a polynomial relationship to it
+
+a certifier **B** is an algorithm that can verify if a solution is correct for a problem
+
+**NP** is any problem with an efficient (polynomial time) certifier
+
+examples
+
+- 3Sat: \\(t\\) assignment of truth values to variables; ch

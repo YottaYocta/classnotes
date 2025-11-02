@@ -30,4 +30,10 @@
     width: 100%;
     border: solid #000 1px;
   }
+
+  .note > ul {
+    list-style: square;
+    gap: 0.25rem;
+    padding: 0 0 0 1rem;
+  }
 }
