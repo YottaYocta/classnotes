@@ -1,0 +1,50 @@
+---
+title: "NP-Completeness Examples"
+layout: ../../../layouts/Note.astro
+---
+
+# Graph Coloring (8.7)
+
+Formal definition of \\(k\\)-coloring:
+
+\\[f: V\rightarrow \{1, 2, \dots, k\}]\\]
+
+such that every edge \\(\(u, v\)\\), \\(f(u) \neq f(v)\\)
+
+Use cases: wire radio assignment, resource conflict prevention
+
+## NP Complete
+
+Certificate: a valid k-coloring of graph; check for invalid edges and nodes
+
+## NP Hard
+
+Reduce \\(\rightarrow\\) 3-SAT: build a graph where some 'top level' node cannot be colored if one or more of boolean vars \\(v_1, v_2, v_3\\) is false; use colors to represent true/false state (necessary to have a 'base' state too?)
+
+# Hamiltonian Cycle
+
+## NP Complete
+
+certificate: ordered list of vertices, checkable in poly time
+
+## NP Hard
+
+Reduction to 3-SAT
+
+We construct a graph where there are \\(2^n\\) possible hamiltonian cycles. This is done by having a start node \\(s\\) and end node \\(t\\), and multiple rows of nodes. Each row \\(P_i\\) can be traversed in either way, and each endpoint of the row are connected to the two endpoints of the next row. A row corresponds to one boolean variable assignment \\(v_i\\), and traversing the row left or right corresponds with true or false.
+
+Given some clause like \\((v_1 \vee v_2 \vee v_3)\\), we can encode the requirement by making a 'clause fulfillment node' \\(C\\) such that for one of the boolean variable's truth conditions, this extra node \\(C\\) can be taken as a 'shortcut' by traveling in the correct direction for that row.
+
+# Traveling Salesman
+
+Reduction to Hamiltonian Cycle:
+
+make edges = 1; if salesman exists, then hamiltonian exists
+
+# Subset Sum (8.8)
+
+Reduction to 3DM (3-dimensional matching)
+
+let \\(n\\) be the size of \\(X, Y, Z\\), and \\(m\\) be the size of \\(T\\), the source set of triplets. Note that certain elements may repeat within this set.
+
+For each subset of \\((x_i, y_j, z_k)\\), we encode it as a base m + 1 (to prevent overflow) number with 3n digits, with the \\(i\\)th, \\(j\\)th, \\(k\\)th digit set to 1 and the rest set to zero. We then encode the decision version of 3DM (is there a perfect matching set of size \\(k\\) such that their union covers all elements?) as the expected sum by creating a 'goal sum' of 3n digits, each value set to 1.
