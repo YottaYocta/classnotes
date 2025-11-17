@@ -29,22 +29,6 @@ If the black box algorithm itself is <M>O(n^a)</M>, then under polynomial-time r
 
 We can compare **tractability**, or the complexity of different problems, by mapping the input and steps needed for one problem into a second problem. Following is an example of this technique for the Independent Set Problem and the Vertex Cover Problem.
 
-Within a graph \\(G=(V, E)\\), a **subset of nodes \\(S\\) is independent if no two nodes in that set are joined by an edge**. The decision variant of the Independent Set problem is as follows:
-
-<figure>
-  <figcaption>Independent Set Decision Problem</figcaption>
-  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain an independent
-  set of at least size \\(k\\)?
-</figure>
-
-For the Vertex Cover Problem, a subset \\(S\\) of some graph \\(G=(V, E)\\) is a vertex cover if every edge in \\(E\\) has at least one endpoint in \\(S\\). Here's the decision variant of the problem:
-
-<figure>
-  <figcaption>Vertex Cover Decision Problem</figcaption>
-  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain a vertex
-  cover of at least size \\(k\\)?
-</figure>
-
 ---
 
 let S be V - A, where A is an independent set. Prove that S is a vertex cover.
@@ -99,11 +83,15 @@ note: for reductions, we almost always find a mapping from one problem to anothe
 
 \\(A\\) has polynomial running time if exists a polynomial function \\(p(\cdot)\\) such that \\(A\\) is of \\(O(p(\|s\|))\\) complexity. In other words, the time complexity of \\(A\\) must be a polynomial function of its input size
 
-Some certifier \\(B\\) is a function that takes two parameters \\(s\\) and \\(t\\), with \\(s\\)
-representing an input string and \\(t\\) a verification string used to check
-if \\(s\\) is valid
+---
 
-this checker must run in polynomial time
+# Certifying NP
+
+a certifier \\(B\\) is an algorithm that can verify if a solution is correct for a problem
+
+Some certifier \\(B\\) is a function that takes two parameters \\(s\\) and \\(t\\), with \\(s\\)
+representing an input and \\(t\\) a verification ('correct answer') used to check
+if \\(s\\) is valid
 
 Efficient certification involves
 
@@ -115,9 +103,10 @@ In other words, an efficient certification is valid only when
 - there is a certifier that can correctly check if a solution works in polynomial time
 - all \\(s\\) have a certifier string \\(t\\) that has a polynomial relationship to it
 
-a certifier **B** is an algorithm that can verify if a solution is correct for a problem
-
-**NP** is any problem with an efficient (polynomial time) certifier
+<figure>
+  **NP** is any problem with an efficient (polynomial time) certifier; it is
+  possible to check in polynomial time that an answer to the problem is correct
+</figure>
 
 examples
 
@@ -132,13 +121,15 @@ Since we don't know the answer to \\(\mathcal\{P = NP\}\\), we have instead turn
 To show that a problem is NP-complete, we must reduce it to some existing np problem:
 
 <figure>
-<figcaption>
-Proving NP completeness for some problem \\(B\\)
-</figcaption>
-
-<p>
-Given an NP-complete problem \\(A\\) show \\(A \leq_R B \\)
-</p>
+  <figcaption>Proving NP completeness for some problem \\(B\\)</figcaption>
+  <p>
+    Show that problem can be efficiently verified in polynomial time with a
+    certifier.
+  </p>
+  <p>
+    Then, \\(A\\) show \\(A \leq_R B \\). In other words, show that every
+    instance of \\(B\\) can be reduced to an example of \\(A\\)
+  </p>
 </figure>
 
 ## Circuit Satisfiability
@@ -156,8 +147,3 @@ must answer: for specific input \\(s\\), does there exist \\(t\\) of length \\(p
 can be reduced to SAT
 
 3SAT also reducable to SAT
-
-general strategy:
-
-- show problem is NP
-- try to reduce arbitrary example of existing NP-complete problem into current problem

@@ -36,7 +36,8 @@ Then \\(v(f) = c(A, B)\\)
 G=(V,E)
 G' <- residual graph, 'how much space is left on each edge'
 def exists_path(G'):
-    DFS/BFS to check if s-t path exists on residual graph, returns found path and bottleneck if path exists
+    DFS/BFS to check if s-t path exists on residual graph
+    return found path and bottleneck if path exists
 
 while path, bottleneck <- exists_path(G'):
     add the bottleneck value to path in G

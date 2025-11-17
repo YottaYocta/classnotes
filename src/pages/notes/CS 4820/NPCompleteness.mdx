@@ -48,3 +48,25 @@ Reduction to 3DM (3-dimensional matching)
 let \\(n\\) be the size of \\(X, Y, Z\\), and \\(m\\) be the size of \\(T\\), the source set of triplets. Note that certain elements may repeat within this set.
 
 For each subset of \\((x_i, y_j, z_k)\\), we encode it as a base m + 1 (to prevent overflow) number with 3n digits, with the \\(i\\)th, \\(j\\)th, \\(k\\)th digit set to 1 and the rest set to zero. We then encode the decision version of 3DM (is there a perfect matching set of size \\(k\\) such that their union covers all elements?) as the expected sum by creating a 'goal sum' of 3n digits, each value set to 1.
+
+# Set Decision
+
+Within a graph \\(G=(V, E)\\), a **subset of nodes \\(S\\) is independent if no two nodes in that set are joined by an edge**. The decision variant of the Independent Set problem is as follows:
+
+<figure>
+  <figcaption>Independent Set Decision Problem</figcaption>
+  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain an independent
+  set of at least size \\(k\\)?
+</figure>
+
+# Vertex Cover
+
+For the Vertex Cover Problem, a subset \\(S\\) of some graph \\(G=(V, E)\\) is a vertex cover if every edge in \\(E\\) has at least one endpoint in \\(S\\). Here's the decision variant of the problem:
+
+<figure>
+  <figcaption>Vertex Cover Decision Problem</figcaption>
+  Given a graph \\(G=(V, E)\\) and an integer \\(k\\), does \\(G\\) contain a vertex
+  cover of at least size \\(k\\)?
+</figure>
+
+# Gadgets
