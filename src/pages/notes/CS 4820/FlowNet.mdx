@@ -1,0 +1,53 @@
+---
+layout: ../../../layouts/Note.astro
+title: Flow Networks
+---
+
+Directed graph \\(G=(V,E)\\), special nodes \\(s, t\\) and edges with capacity. Goal is to find maximum flow from \\(s\\) to \\(t\\).
+
+Formally, a _flow_ is an assignment of flow values to edges. A valid assignment obeys the following rules
+
+- flow going into any node equals flow going out of any node
+- flow on any edge does not exceed that edge's capacity
+
+# S-T Cut
+
+partition of nodes into two sets, one containing \\(s\\) and the other containing \\(t\\)
+
+<figure>
+  Let \\(C=(A, B)\\) be an \\(s-t\\) cut. 
+  
+  \\(v(f) = \sum f_\{out\}(e) - \sum f_\{into\}(e)\\) for either subset
+</figure>
+
+A corollary is that for any cut \\(C=(A,B)\\), the flow traveling out of \\(A\\) is at most the capacity of all edges going out of \\(A\\)
+
+<figure>
+<figcaption>Max-flow min-cut theorem</figcaption>
+  Let \\(C=(A, B)\\) be a min \\(s-t\\) cut. and \\(f\\) be a max flow.
+
+Then \\(v(f) = c(A, B)\\)
+
+</figure>
+
+# Ford Fulkerson
+
+```
+G=(V,E)
+G' <- residual graph, 'how much space is left on each edge'
+def exists_path(G'):
+    DFS/BFS to check if s-t path exists on residual graph, returns found path and bottleneck if path exists
+
+while path, bottleneck <- exists_path(G'):
+    add the bottleneck value to path in G
+    update G' to match updated flow values
+
+total flow: sum over all edges into t
+```
+
+Time complexity: `O(C * (m + n))`
+
+## Reductions
+
+1. Construct network with \\(s,t\\)
+2. Ford Fulkerson
