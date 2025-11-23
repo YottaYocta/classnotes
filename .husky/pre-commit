@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Update git timestamps cache
+node scripts/update-git-timestamps.js
+
+# Add the updated cache to the commit
+git add git-timestamps.json

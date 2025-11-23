@@ -1,0 +1,50 @@
+{
+  "src/pages/notes/CS 3780/Generative.md": {
+    "createdAt": "2025-11-08T23:10:46-05:00",
+    "modifiedAt": "2025-11-08T23:10:46-05:00"
+  },
+  "src/pages/notes/CS 3780/LanguageModeling.md": {
+    "createdAt": "2025-11-23T01:07:39-05:00",
+    "modifiedAt": "2025-11-23T01:07:39-05:00"
+  },
+  "src/pages/notes/CS 3780/NeuralNet.md": {
+    "createdAt": "2025-10-31T01:37:59-04:00",
+    "modifiedAt": "2025-11-08T23:10:46-05:00"
+  },
+  "src/pages/notes/CS 3780/Optimization.md": {
+    "createdAt": "2025-11-03T21:02:15-05:00",
+    "modifiedAt": "2025-11-03T21:02:15-05:00"
+  },
+  "src/pages/notes/CS 3780/_Bayes.md": {
+    "createdAt": "2025-11-23T01:13:02-05:00",
+    "modifiedAt": "2025-11-23T01:13:02-05:00"
+  },
+  "src/pages/notes/CS 3780/_LearningTheory.md": {
+    "createdAt": "2025-11-23T01:13:02-05:00",
+    "modifiedAt": "2025-11-23T01:13:02-05:00"
+  },
+  "src/pages/notes/CS 3780/_MiscNotes.md": {
+    "createdAt": "2025-11-23T01:13:02-05:00",
+    "modifiedAt": "2025-11-23T01:13:02-05:00"
+  },
+  "src/pages/notes/CS 3780/_ViterbiAlgorithm.md": {
+    "createdAt": "2025-11-23T01:13:02-05:00",
+    "modifiedAt": "2025-11-23T01:13:02-05:00"
+  },
+  "src/pages/notes/CS 4820/ComplexityClasses.mdx": {
+    "createdAt": "2025-10-31T01:14:28-04:00",
+    "modifiedAt": "2025-11-18T22:45:09-05:00"
+  },
+  "src/pages/notes/CS 4820/FlowNet.mdx": {
+    "createdAt": "2025-11-17T09:36:26-05:00",
+    "modifiedAt": "2025-11-17T09:55:22-05:00"
+  },
+  "src/pages/notes/CS 4820/NPCompleteness.mdx": {
+    "createdAt": "2025-11-14T01:50:50-05:00",
+    "modifiedAt": "2025-11-18T22:45:09-05:00"
+  },
+  "src/pages/notes/CS 4820/_ApproxAlgos.mdx": {
+    "createdAt": "2025-11-23T01:13:02-05:00",
+    "modifiedAt": "2025-11-23T01:13:02-05:00"
+  }
+}
