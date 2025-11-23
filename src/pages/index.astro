@@ -2,10 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import { type FileData } from "../types.ts";
 import FolderContainer from "../components/FolderContainer";
+import { getGitTimestamps, getGlobalLastUpdated } from "../utils/git-timestamps.ts";
 
 const matches = import.meta.glob("./notes/**/*.{md,mdx}", { eager: true });
 
 const groupedNotes: Map<string, FileData[]> = new Map();
+const allFilePaths: string[] = [];
 
 Object.entries(matches).forEach(([path, module]: [string, any]) => {
   const url = path.replace("./", "/").replace(/\.(md|mdx)$/, "");
@@ -16,27 +18,33 @@ Object.entries(matches).forEach(([path, module]: [string, any]) => {
       .pop()
       ?.replace(/\.(md|mdx)$/, "");
 
+  // Get the actual file path for git
+  const filePath = path.replace("./", "src/pages/");
+  allFilePaths.push(filePath);
+
+  // Get git timestamps
+  const timestamps = getGitTimestamps(filePath);
+
   const pathParts = path.split("/");
   const folder = pathParts.length === 3 ? "toplevelfiles" : pathParts[2];
 
+  const fileData: FileData = {
+    url,
+    title,
+    createdAt: timestamps?.createdAt,
+    modifiedAt: timestamps?.modifiedAt,
+  };
+
   if (!groupedNotes.has(folder)) {
-    groupedNotes.set(folder, [
-      {
-        url,
-        title,
-      },
-    ]);
+    groupedNotes.set(folder, [fileData]);
   } else {
     const res = groupedNotes.get(folder) ?? [];
-    groupedNotes.set(folder, [
-      ...res,
-      {
-        url,
-        title,
-      },
-    ]);
+    groupedNotes.set(folder, [...res, fileData]);
   }
 });
+
+// Get global last updated timestamp
+const globalLastUpdated = getGlobalLastUpdated(allFilePaths);
 
 console.log(groupedNotes);
 ---
@@ -44,12 +52,17 @@ console.log(groupedNotes);
 <Layout>
   <main class="w-full flex flex-col items-center justify-start p-20 pb-36">
     <div class="w-full max-w-3xl p-4 flex flex-col items-center gap-16">
-      <div class="w-full flex justify-center">
+      <div class="w-full flex flex-col items-center gap-2">
         <h1 class="tracking-tighter">
           <a href="https://ryanwqiu.com" target="_blank" rel="noopener"
             >@Ryan's</a
           > Class Notes
         </h1>
+        {globalLastUpdated && (
+          <p class="text-sm text-gray-500">
+            Last updated: {globalLastUpdated.toLocaleDateString()}
+          </p>
+        )}
       </div>
       <FolderContainer folders={[...groupedNotes.entries()]} client:visible />
     </div>

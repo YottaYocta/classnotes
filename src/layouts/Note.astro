@@ -1,6 +1,30 @@
 ---
 import "../styles/global.css";
+import { getGitTimestamps } from "../utils/git-timestamps.ts";
+import { readdirSync, existsSync } from "fs";
+import { join, dirname, basename } from "path";
+
 const { frontmatter } = Astro.props;
+
+// Get the current file path from the Astro URL and decode URL encoding
+const currentPath = decodeURIComponent(Astro.url.pathname);
+const basePath = `src/pages${currentPath}`;
+
+// Find file with any extension
+let filePath: string | undefined;
+const dir = dirname(basePath);
+const fileName = basename(basePath);
+
+if (existsSync(dir)) {
+  const files = readdirSync(dir);
+  const matchingFile = files.find((f) => f.startsWith(fileName + "."));
+  if (matchingFile) {
+    filePath = join(dir, matchingFile);
+  }
+}
+
+const timestamps = filePath ? getGitTimestamps(filePath) : null;
+console.log("Final filePath:", filePath, "timestamps:", timestamps);
 ---
 
 <!doctype html>
@@ -25,6 +49,28 @@ const { frontmatter } = Astro.props;
     <main
       class="w-full max-w-2xl flex flex-col items-start p-4 pb-32 gap-8 tracking-tight note"
     >
+      {
+        (
+          <div class="w-full flex justify-between gap-4 text-sm text-neutral-500 border-b border-gray-300 pb-4">
+            {
+              <span>
+                Last modified:{" "}
+                {timestamps
+                  ? timestamps.modifiedAt.toLocaleDateString()
+                  : " Not Tracked Yet"}
+              </span>
+            }
+            {
+              <span>
+                Created:{" "}
+                {timestamps
+                  ? timestamps.createdAt.toLocaleDateString()
+                  : " Not Tracked Yet"}
+              </span>
+            }
+          </div>
+        )
+      }
       <slot />
     </main>
   </body>
