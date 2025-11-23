@@ -10,6 +10,12 @@ const groupedNotes: Map<string, FileData[]> = new Map();
 const allFilePaths: string[] = [];
 
 Object.entries(matches).forEach(([path, module]: [string, any]) => {
+  // Skip files that start with underscore (draft files)
+  const fileName = path.split("/").pop() || "";
+  if (fileName.startsWith("_")) {
+    return;
+  }
+
   const url = path.replace("./", "/").replace(/\.(md|mdx)$/, "");
   const title =
     module.frontmatter?.title ||
