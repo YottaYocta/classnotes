@@ -6,11 +6,9 @@ import { join, dirname, basename } from "path";
 
 const { frontmatter } = Astro.props;
 
-// Get the current file path from the Astro URL and decode URL encoding
 const currentPath = decodeURIComponent(Astro.url.pathname);
 const basePath = `src/pages${currentPath}`;
 
-// Find file with any extension
 let filePath: string | undefined;
 const dir = dirname(basePath);
 const fileName = basename(basePath);
