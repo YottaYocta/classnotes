@@ -2,7 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import { type FileData } from "../types.ts";
 import FolderContainer from "../components/FolderContainer";
-import { getGitTimestamps, getGlobalLastUpdated } from "../utils/git-timestamps.ts";
+import {
+  getGitTimestamps,
+  getGlobalLastUpdated,
+} from "../utils/git-timestamps.ts";
 
 const matches = import.meta.glob("./notes/**/*.{md,mdx}", { eager: true });
 
@@ -10,9 +13,9 @@ const groupedNotes: Map<string, FileData[]> = new Map();
 const allFilePaths: string[] = [];
 
 Object.entries(matches).forEach(([path, module]: [string, any]) => {
-  // Skip files that start with underscore (draft files)
+  // Skip files that start with underscore (draft files) in production only
   const fileName = path.split("/").pop() || "";
-  if (fileName.startsWith("_")) {
+  if (fileName.startsWith("D_") && import.meta.env.PROD) {
     return;
   }
 
@@ -64,11 +67,13 @@ console.log(groupedNotes);
             >@Ryan's</a
           > Class Notes
         </h1>
-        {globalLastUpdated && (
-          <p class="text-sm text-gray-500">
-            Last updated: {globalLastUpdated.toLocaleDateString()}
-          </p>
-        )}
+        {
+          globalLastUpdated && (
+            <p class="text-sm text-gray-500">
+              Last updated: {globalLastUpdated.toLocaleDateString()}
+            </p>
+          )
+        }
       </div>
       <FolderContainer folders={[...groupedNotes.entries()]} client:visible />
     </div>
