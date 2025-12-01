@@ -1,0 +1,28 @@
+---
+title: "Approximation Algorithms"
+layout: ../../../layouts/Note.astro
+---
+
+# Linear Programming
+
+# Integer Programming
+
+# Center Selection
+
+We have many towns, with each town \\(s \in S\\) needing a grocery center nearby. The Center selection problem asks, given a number \\(k\\) of centers we can build and the set of towns \\(S\\), what is the smallest distance to any center we can obtain?
+
+## Initial Greedy Attempt
+
+Iteratively place centers at locations that minimize the distance for that step.
+
+{/* create svg diagram with two towns, s and v, and place on center between them. minimum is d */}
+
+The issue is that the worst case for the above is unbounded. If we can place two centers, the better solution would be to place one right on top of each town.
+
+## Revised Greedy Attempt
+
+Place centers on top of towns. It can be shown that this algorithm, at its worst, will result in a radius double that of its optimal
+
+# Set Cover
+
+Greedy attempt to solve involves picking subsets that give the highest ratio of covered units to subset weight
