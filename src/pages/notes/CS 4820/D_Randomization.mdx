@@ -7,7 +7,58 @@ layout: ../../../layouts/Note.astro
 
 Try to find a partition of a graph's nodes into two sets such that the number of edges spanning across this partition is minimized.
 
-Does this by **contracting nodes**
+<figure>
+  <figcaption>General Min-Cut definition</figcaption>
+  Given a graph \\(G = (V,E)\\), a min-cut is a partition of the graph into two subsets
+  \\(A,B\\) such that the edges spanning across the subsets are a minimum .
+</figure>
+
+An intuitive way to approach this problem is by David Karger's Contraction Algorithm, which solves the question by **contracting nodes**
+
+The Contraction Algorithm runs on connected multigraph \\(G=(V,E)\\), an undirected graph that is allowed to have multiple parallel edges between same pair of nodes.
+
+Starts by choosing edge \\(e = (u,v)\\) of \\(G\\) at random and contracting it; \\(u\\) and \\(v\\) join into a single vertex, and any edges connecting the two are deleted.
+
+Algorithm terminates when two supernodes are produced, \\(v_1\\) and \\(v_2\\). Each supernode corresponds to a subset \\(S(v_1)\\) of nodes that were contracted into it. \\(S(v_1)\\) and \\(S(v_2)\\) form a partition of the graph's vertices.
+
+<figure>
+  The Contraction Algorithm returns a global min-cut of \\(G\\) with probability
+  at least \\(1/\binom n 2\\)
+</figure>
+
+Suppose we have \\(G = (E,V)\\) with min cut \\(A, B\\). Let's say this min cut has \\(k\\) edges spanning across the partition.
+
+For a single iteration, we want to get an upper bound on the probability that something goes wrong, i.e. an edge \\(e=(u,v)\\) that spans across \\(A, B\\) getting deleted after \\(u,v\\) are contracted.
+
+Lower bound on edges:
+\\[
+|E| \geq \frac 1 2 kn
+\\]
+Because every node \\(n_i\\) must have at least \\(k\\) edges, and each edge is connected to another node, so we add \\(\frac 1 2\\) to avoid double counting edges
+
+A bad case involves picking one of the \\(k\\) edges, so the probability on choosing one of these bad edges over all edges is
+\\[
+\frac k \{\frac 1 2 k n\} = \frac 2 n
+\\]
+
+Let \\(\mathcal\{E\}\_1\\) be the event that on the \\(1\\)st iteration, a non-min-cut edge was contracted. The chances of this happening are \\(1 - \frac 1 \{\frac 2 n\}\\)
+
+We want to know probability of producing a min-cut after contracting all edges until two supernodes are left. This is equivalent to the union of events \\(\mathcal E_1, \mathcal E_2, \dots, \mathcal E\_\{n-2\}\\) happening.
+
+For the \\(j\\)th contraction, the probability of \\(\mathcal E_j\\) is \\(1 - \frac k \{\frac 1 2 k (n - j)\} = 1 - \frac 2 \{n - j\}\\).
+
+Thus, the union of \\(\mathcal E_1 \dots \mathcal E\_\{n - 2\}\\) is
+
+\\[
+(1 - \frac 2 n)(1 - \frac 2 \{n - 1\})\dots(1 -\frac 2 3)
+\\]
+\\[
+= \binom n 2 ^\{-1\}
+\\]
+
+In other words, single run of Contraction Algo fails to find global min with probability \\(1 - 1 / \binom n 2\\)
+
+We can increase probabilities of success by running algorithm multiple times
 
 # Max 3SAT
 
