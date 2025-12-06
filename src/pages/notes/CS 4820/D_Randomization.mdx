@@ -56,9 +56,58 @@ Thus, the union of \\(\mathcal E_1 \dots \mathcal E\_\{n - 2\}\\) is
 = \binom n 2 ^\{-1\}
 \\]
 
-In other words, single run of Contraction Algo fails to find global min with probability \\(1 - 1 / \binom n 2\\)
+In other words, single run of Contraction Algo finds a global min with probability \\(1 / \binom n 2\\)
 
-We can increase probabilities of success by running algorithm multiple times
+We can increase probabilities of success by running algorithm multiple times and choosing the minimum cut across all results. To do this, we need to examine the problem from the probability of failure; what is the chance that the true global min cut is found after \\(t\\) runs?
+
+If the probability of failure is \\(1 - 1 / \binom n 2 \\), then the union of \\(t\\) runs is \\((1 - 1 / \binom n 2)^t\\)
+
+Recall the definition of \\(1 / e\\):
+
+<figure>
+<figcaption>
+Definition of \\(1 / e\\)
+</figcaption>
+\\[\lim_\{k \rightarrow \infty\}(1 - \frac 1 k)^k = 1 / e\\]
+</figure>
+
+If take the best result over \\(\binom n 2\\) runs of the contraction algorithm, the probability of failure \\((1 - 1 / \binom n 2)^\{\binom n 2\} = 1 / e\\). Running the algorithm \\(\binom n 2 \ln n\\) times gives us a probability of failure \\(1 / n\\)
+
+<figure>
+  An undirected graph \\(G = (V, E)\\) has at most \\(\binom n 2\\) global min
+  cuts
+</figure>
+
+# Random Variables
+
+A random variable can be thought of as a function that maps events from the sample space (all possible events) to natural numbers. If \\(X\\) is a random variable and \\(j\\) is a natural number, then \\(P\[X = j\]\\) refers to the number of events that map to \\(j\\) divided by all events in the sample space. \\(X^\{-1\}(j)\\) is the set of events that map to \\(j\\)
+
+Here's an example of using random variables with a coin flip:
+
+let \\(X\\) be a random variable corresponding to the number of flips. From a function notation standpoint \\(X: \\\{T\\\}^\* \\\{H\\\} \rightarrow \mathbb\{N\}\\); the variable maps a sequence of tails (and then a final head) to the number of flips that sequence takes.
+
+The expected value of a random variable is simply its average across infinite trials:
+\\[
+E\[X\] = \sum^\infty\_\{j = 0\} \{j\cdot Pr\[X=j\]\}
+\\]
+
+Let \\(p\\) be the chance that the coin lands tails. For any such sequence of length \\(j\\), \\(P\[X = j\] = (p^\{j - 1\})(1 - p)\\)
+
+(solve by expanding sum, giving answer in terms of \\(p\\))
+
+<figure>
+  <figcaption>Linearity of Expectation</figcaption>
+  Given two random variables \\(X\\) and \\(Y\\) defined over the same sample space,
+  \\(X + Y = X(\omega) + Y(\omega)\\) on a sample point \\(w\\). \\[E\[X + Y\] =
+  E\[X\] + E\[Y\]\\]
+</figure>
+
+Example: collecting Coupons
+
+Your goal is to get \\(n\\) different coupon types from cereals. The probability of encountering a new coupon is lower the longer you collect. How many boxes should you expect to collect in order to have one of each coupon type?
+
+Strategy:
+\\(X\\) random variable corresponding to number of boxes collected. We can break this down into phases, where \\(X = X_1 \cup X_2 \dots \cup X_n\\), and \\(X_i\\) corresponds to the number of boxes collected while waiting for your \\(i\\)th new coupon
 
 # Max 3SAT
 
